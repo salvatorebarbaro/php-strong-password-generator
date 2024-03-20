@@ -18,7 +18,7 @@
                 $password_forte.= $stringa_Per_password[array_rand($stringa_Per_password)];
             }
 
-        echo $password_forte;
+        return $password_forte;
         }
     }
 ?>

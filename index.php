@@ -1,4 +1,18 @@
-<?php include './functions.php';?>
+<?php
+//  andiamo a includere la "pagina dove è la nostra funzione"
+ include './functions.php';
+// apriamo la sessione per poterci importare i dati
+ session_start();
+
+ if(isset($_GET['password_length'])){
+    // andiamo a salvarci il valore della password in una sessione anadndoci a richiamre la nostra funzione e dicendogli di prendere il valore dell'utente
+    $_SESSION['password_length'] = GeneratePassword($_GET['password_length']);
+    // comando usato per riportarci o indirizzare l'utente verso la pagina che vogliamo noi
+    header('Location: passwordview.php');
+    exit();
+ }
+ 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,30 +27,23 @@
         <h1 class="py-2 fs-1 my-2 text-danger text-center ">Password forte</h1>
         <div class="row">
             <div class="col">
-            <form class="d-flex flex-column  " action="" method="get">
-                
-                <div class="col d-flex justify-content-center my-4">
-                    <label class="fs-5 text-uppercase text-success " for="lunghezza password" >lunghezza password</label>
-                    <!--                                                                                                 eseguiamo un controllo sul parametro inviato se è  password_length lo andiamo ad eseguire come normale se è false andiamo a inserire 0 cosi correggiamo l'errore della password sempre a schermo               -->
-                    <input class="mx-5" type="number" min="1" max="10" name="password_length" value=""<?php echo isset($_GET['password_length']) ? $_GET['password_length'] : '0'; ?>>
-                </div>
-                <div class="col d-flex justify-content-center my-2">
-                    <button class="btn btn-primary" type="submit">invia</button>
-                </div>
-                
+                <form class="d-flex flex-column  " action="" method="get">
+                    
+                    <div class="col d-flex justify-content-center my-4">
+                        <label class="fs-5 text-uppercase text-success " for="lunghezza password" >lunghezza password</label>
+                        <!--                                                                                                 eseguiamo un controllo sul parametro inviato se è  password_length lo andiamo ad eseguire come normale se è false andiamo a inserire 0 cosi correggiamo l'errore della password sempre a schermo               -->
+                        <input class="mx-5" type="number" min="1" max="10" name="password_length" value=""<?php echo isset($_GET['password_length']) ? $_GET['password_length'] : '0'; ?>>
+                    </div>
+                    <div class="col d-flex justify-content-center my-2">
+                        <button class="btn btn-primary" type="submit">invia</button>
+                    </div>
+                    
 
-            </form>    
+                </form>    
             </div>
             
         </div>
-        <div class="row text-center">
-            <h3>Password</h3>
-            <div class="col d-flex justify-content-center ">
-                
-                <!-- Stampa la password generata -->
-                <?php  GeneratePassword(); ?>
-            </div>
-        </div>
+       
     </div>
 
     
